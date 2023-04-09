@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Задание");
+    setWindowTitle("Главное окно");
     QString programmPath = qApp->applicationDirPath();
 
     programmPath.append("/QtLanguage_en.qm");
