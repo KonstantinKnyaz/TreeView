@@ -192,10 +192,9 @@ void MainWindow::on_addStolbBtn_clicked()
         QAbstractItemModel *treeModel = currenTree->model();
         int column = currenTree->selectionModel()->currentIndex().column();
         int colCount = treeModel->columnCount();
-        int rowCount = treeModel->rowCount();
         bool changed = treeModel->insertColumn(column + 1);
         if (changed)
-            treeModel->setHeaderData(column + 1, Qt::Horizontal, QVariant(QString("Col%1 Row%2").arg(colCount+1).arg(rowCount)), Qt::EditRole);
+            treeModel->setHeaderData(column + 1, Qt::Horizontal, QVariant(QString("Col%1").arg(colCount+1)), Qt::EditRole);
     }
     resizeToContent();
 }
@@ -234,7 +233,7 @@ void MainWindow::on_addStrBtn_clicked()
 
         for (int column = 0; column < treeModel->columnCount(index.parent()); ++column) {
             QModelIndex child = treeModel->index(index.row()+1, column, index.parent());
-            treeModel->setData(child, QVariant(QString("Col%1 Row%2").arg(colCount).arg(rowCount+1)), Qt::EditRole);
+            treeModel->setData(child, QVariant(QString("Col%1 Row%2").arg(colCount-1).arg(rowCount)), Qt::EditRole);
         }
     }
     resizeToContent();
@@ -250,6 +249,7 @@ void MainWindow::on_delStrBtn_clicked()
     for(int i = modelList.count(); i > 0; i--) {
         QModelIndex index = modelList.at(i-1);
         treeModel->removeRow(index.row(), index.parent());
+//        treeModel->removeRows(index.row(), modelList.count(), index.parent());
     }
 
     resizeToContent();
@@ -301,4 +301,9 @@ void MainWindow::on_action_3_triggered()
     programmPath.append("/QtLanguage_en.qm");
     qTranslator.load(programmPath);
     qApp->installTranslator(&qTranslator);
+}
+
+void MainWindow::on_treeFOne_clicked(const QModelIndex &index)
+{
+
 }

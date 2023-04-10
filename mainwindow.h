@@ -34,6 +34,8 @@ private slots:
 
     void on_action_3_triggered();
 
+    void on_treeFOne_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     //! Поле для текста с красной границей
